@@ -1,0 +1,8 @@
+{
+    "require-dev": {
+        "kint-php/kint": "^4.1"
+    },
+    "require": {
+        "nikic/fast-route": "^1.3"
+    }
+}
