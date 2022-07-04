@@ -7,14 +7,14 @@ require '../vendor/autoload.php';
 // записываем в диспетчер пути(роуты), которые будут доступны в приложении, припереходе по Роуту, передаются данные указанные в параметре
 $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
     // добавление роута, указываем ('метод-доступа','путь-в-URL-при-котором-вызовем-контроллер','контроллер-обработчик-которая-будет-вызываться')
-    $r->addRoute('GET', '/users', 'get_all_users_handler');        //  http://localhost/users
-    // {id} must be a number (\d+) // id - должен быть цифрой
+    $r->addRoute('GET', '/userss', 'get_all_users_handler');        //  http://localhost/users
+    // \d+ - должен быть цифрой, {id:\d+} - id: - будет ключем для доступа к \d+
     $r->addRoute('GET', '/user/{id:\d+}', 'get_user_handler');    //  http://localhost/user/5
     // The /{title} suffix is optional  // опциональный, не обязательный параметр
     $r->addRoute('GET', '/articles/{id:\d+}[/{title}]', 'get_article_handler');
 
     // в параметре роута можно передать не только строку - 'get_all_users_handler', но и массив
-    $r->addRoute('GET', '/userss', ['HomeController','index']); //HomeController - класс, index - метод Класса
+    $r->addRoute('GET', '/users', ['App\controllers\HomeController','index']); //HomeController - класс, index - метод Класса
 });
 
 
@@ -49,12 +49,25 @@ switch ($routeInfo[0]) {    // по умолчание $routeInfo[0]
         $handler = $routeInfo[1];       // получение "название" обработчика, который прописан в диспетчере 'simpleDispatcher'
         $vars = $routeInfo[2];          // параметры которые пришли с запросом, их можно использовать
         //d($handler);
-        d($handler);
+        //d($handler,$vars);
         // если путь в диспетчере существует, вызван нужным методом, и передана имя контроллера =>
         // => можем вызвать контроллер(функцию) 
         // => передаём контроллеру запрос из адресной строки
+
         // вызывает функцию по имени которое ей передали, и передаёт ей параметры
         //call_user_func($handler, $vars);
+
+        // [$handler[0],$handler[1]] - вызывается $handler[0] и на лету вызывает метод $handler[1], передавая методу параметры $vars
+        //call_user_func([$handler[0],$handler[1]], $vars);  
+
+        // создание Экземпляра прям здесь
+        $controller = new $handler[0];
+        // вызов метода созданного Экземпляра
+        //$controller->index(1233);
+
+        // вызов метода Экземпляра
+        call_user_func([$controller,$handler[1]], $vars);
+        
 break;
 }
 

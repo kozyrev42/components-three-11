@@ -20,6 +20,11 @@ class ComposerStaticInitacd630dcb6bceeefff7188bb93dbbeed
         array (
             'FastRoute\\' => 10,
         ),
+        'A' => 
+        array (
+            'Aura\\SqlQuery\\' => 14,
+            'App\\' => 4,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
@@ -30,6 +35,14 @@ class ComposerStaticInitacd630dcb6bceeefff7188bb93dbbeed
         'FastRoute\\' => 
         array (
             0 => __DIR__ . '/..' . '/nikic/fast-route/src',
+        ),
+        'Aura\\SqlQuery\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/aura/sqlquery/src',
+        ),
+        'App\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/app',
         ),
     );
 

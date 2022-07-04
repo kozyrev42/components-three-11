@@ -8,4 +8,6 @@ $baseDir = dirname($vendorDir);
 return array(
     'Kint\\' => array($vendorDir . '/kint-php/kint/src'),
     'FastRoute\\' => array($vendorDir . '/nikic/fast-route/src'),
+    'Aura\\SqlQuery\\' => array($vendorDir . '/aura/sqlquery/src'),
+    'App\\' => array($baseDir . '/app'),
 );
