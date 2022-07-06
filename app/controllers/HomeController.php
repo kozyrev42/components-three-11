@@ -10,7 +10,7 @@ class HomeController
     public function __construct()
     {
         // создаём Экземпляр видов, для дальнейшего использования его методов
-        $this->templates = new Engine('../app/views'); // передаём путь до моих Видов в views
+        $this->templates = new Engine('../app/views','php'); // передаём путь до моих Видов в views
     }
 
     public function index($vars)

@@ -63,9 +63,10 @@ switch ($routeInfo[0]) {    // по умолчание $routeInfo[0]
 
         // [$handler[0],$handler[1]] - вызывается $handler[0] и на лету вызывает метод $handler[1], передавая методу параметры $vars
         //call_user_func([$handler[0],$handler[1]], $vars);  
-
+        
         // создание Экземпляра прям здесь
         $controller = new $handler[0];          // new App\controllers\HomeController;
+        
         // вызов метода созданного Экземпляра
         //$controller->index(1233);
 
