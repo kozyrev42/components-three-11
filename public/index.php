@@ -13,8 +13,11 @@ $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
     // The /{title} suffix is optional  // опциональный, не обязательный параметр
     $r->addRoute('GET', '/articles/{id:\d+}[/{title}]', 'get_article_handler');
 
+
     // в параметре роута можно передать не только строку - 'get_all_users_handler', но и массив
-    $r->addRoute('GET', '/users', ['App\controllers\HomeController','index']); //HomeController - класс, index - метод Класса
+    $r->addRoute('GET', '/home', ['App\controllers\HomeController','index']); //HomeController - класс, index - метод Класса
+    // роут на страницу /about
+    $r->addRoute('GET', '/about', ['App\controllers\HomeController','about']);
 });
 
 
@@ -47,9 +50,10 @@ switch ($routeInfo[0]) {    // по умолчание $routeInfo[0]
     case FastRoute\Dispatcher::FOUND:       // FOUND - константа содержит "1"
         // $routeInfo[1]; $routeInfo[2]; - приходит информация из параметров вызванного Роута
         $handler = $routeInfo[1];       // получение "название" обработчика, который прописан в диспетчере 'simpleDispatcher'
-        $vars = $routeInfo[2];          // параметры которые пришли с запросом, их можно использовать
-        //d($handler);
-        //d($handler,$vars);
+        //$vars = $routeInfo[2];          // параметры которые пришли с запросом, их можно использовать
+
+        //d($handler); exit; // $handler - содержит Третий параметр из addRoute(1,2,3)
+        //d($vars); exit;
         // если путь в диспетчере существует, вызван нужным методом, и передана имя контроллера =>
         // => можем вызвать контроллер(функцию) 
         // => передаём контроллеру запрос из адресной строки
@@ -61,18 +65,18 @@ switch ($routeInfo[0]) {    // по умолчание $routeInfo[0]
         //call_user_func([$handler[0],$handler[1]], $vars);  
 
         // создание Экземпляра прям здесь
-        $controller = new $handler[0];
+        $controller = new $handler[0];          // new App\controllers\HomeController;
         // вызов метода созданного Экземпляра
         //$controller->index(1233);
 
-        // вызов метода Экземпляра
-        call_user_func([$controller,$handler[1]], $vars);
-        
+        // вызов метода '$handler[1]]'  Экземпляра
+
+        $vars = "vars";
+        call_user_func([$controller,$handler[1]],$vars);
 break;
 }
-
 // функция которая будет вызываться из Роутера
-function get_user_handler($vars) 
-{
-    echo $vars["id"];
-};
+//function get_user_handler($vars) 
+//{
+//   echo $vars["id"];
+//};

@@ -5,7 +5,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '9f6baced68b28dd263d49dd59086aa72f210a060',
+        'reference' => '661da435df620125806c77e35f4c4fad4e6ccc9c',
         'name' => '__root__',
         'dev' => true,
     ),
@@ -16,7 +16,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '9f6baced68b28dd263d49dd59086aa72f210a060',
+            'reference' => '661da435df620125806c77e35f4c4fad4e6ccc9c',
             'dev_requirement' => false,
         ),
         'aura/sqlquery' => array(
@@ -36,6 +36,15 @@
             'aliases' => array(),
             'reference' => 'fa53c4333cda79dc9cb002cfa029abe994d0ae00',
             'dev_requirement' => true,
+        ),
+        'league/plates' => array(
+            'pretty_version' => 'v3.4.0',
+            'version' => '3.4.0.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../league/plates',
+            'aliases' => array(),
+            'reference' => '6d3ee31199b536a4e003b34a356ca20f6f75496a',
+            'dev_requirement' => false,
         ),
         'nikic/fast-route' => array(
             'pretty_version' => 'v1.3.0',

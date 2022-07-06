@@ -12,6 +12,10 @@ class ComposerStaticInitacd630dcb6bceeefff7188bb93dbbeed
     );
 
     public static $prefixLengthsPsr4 = array (
+        'L' => 
+        array (
+            'League\\Plates\\' => 14,
+        ),
         'K' => 
         array (
             'Kint\\' => 5,
@@ -28,6 +32,10 @@ class ComposerStaticInitacd630dcb6bceeefff7188bb93dbbeed
     );
 
     public static $prefixDirsPsr4 = array (
+        'League\\Plates\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/league/plates/src',
+        ),
         'Kint\\' => 
         array (
             0 => __DIR__ . '/..' . '/kint-php/kint/src',
