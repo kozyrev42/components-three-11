@@ -4,6 +4,8 @@ namespace App\controllers;
 use App\QueryBuilder;
 use League\Plates\Engine;
 use Exception;
+use App\exceptions\NotMoneyException;
+use App\exceptions\AccountBlockedException;
 
 class HomeController
 {
@@ -29,14 +31,18 @@ class HomeController
     {
         //d($vars['cash']);
         // попробуем отловить Ошибку-Исключение
+        
         try {
             // вызов функции, может выбросить Исключение
             $this->throwException($vars['cash']);
-        } catch (Exception $exception) { // ловим исключение, в $exception - храниться информация по выброшеному Исключению
+        } catch (NotMoneyException $exception) { // ловим исключение, в $exception - храниться информация по выброшеному Исключению
+            // реагируем, если исключение выброшено 
+            echo $exception->getMessage();
+            // отлов уже другого исключения
+        } catch (AccountBlockedException $exception) { // ловим исключение
             // реагируем, если исключение выброшено 
             echo $exception->getMessage();
         }
-
 
         // Render a template
         echo $this->templates->render('about', ['name' => 'Jonathan about']);
@@ -47,10 +53,12 @@ class HomeController
     {
         $total = 10;
 
+        throw new AccountBlockedException ("аккаунт заблокирован!");
+
         if($hotim>$total) {
             // ручной выброс Исключения
             
-            throw new Exception("недостаточно средств сабака"); // передаём Экземпляру сообщение, чтобы вывести его в отлове, если этот Экземпляр исключения создасться
+            throw new NotMoneyException("недостаточно средств сабака"); // передаём Экземпляру сообщение, чтобы вывести его в отлове, если этот Экземпляр исключения создасться
         }
     }
 }
