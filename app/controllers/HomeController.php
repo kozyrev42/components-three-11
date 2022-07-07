@@ -3,6 +3,7 @@ namespace App\controllers;
 
 use App\QueryBuilder;
 use League\Plates\Engine;
+use Exception;
 
 class HomeController
 {
@@ -26,7 +27,30 @@ class HomeController
 
     public function about($vars)
     {
+        //d($vars['cash']);
+        // попробуем отловить Ошибку-Исключение
+        try {
+            // вызов функции, может выбросить Исключение
+            $this->throwException($vars['cash']);
+        } catch (Exception $exception) { // ловим исключение, в $exception - храниться информация по выброшеному Исключению
+            // реагируем, если исключение выброшено 
+            echo $exception->getMessage();
+        }
+
+
         // Render a template
         echo $this->templates->render('about', ['name' => 'Jonathan about']);
+    }
+
+    //  функция создаёт Исключение при выполнении опредделённого условия
+    public function throwException($hotim=null)
+    {
+        $total = 10;
+
+        if($hotim>$total) {
+            // ручной выброс Исключения
+            
+            throw new Exception("недостаточно средств сабака"); // передаём Экземпляру сообщение, чтобы вывести его в отлове, если этот Экземпляр исключения создасться
+        }
     }
 }

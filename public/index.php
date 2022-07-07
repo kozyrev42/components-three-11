@@ -18,6 +18,9 @@ $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
     $r->addRoute('GET', '/home', ['App\controllers\HomeController','index']); //HomeController - класс, index - метод Класса
     // роут на страницу /about
     $r->addRoute('GET', '/about', ['App\controllers\HomeController','about']);
+
+
+    $r->addRoute('GET', '/about/{cash:\d+}', ['App\controllers\HomeController','about']);  //  http://localhost/about/5
 });
 
 
@@ -50,7 +53,7 @@ switch ($routeInfo[0]) {    // по умолчание $routeInfo[0]
     case FastRoute\Dispatcher::FOUND:       // FOUND - константа содержит "1"
         // $routeInfo[1]; $routeInfo[2]; - приходит информация из параметров вызванного Роута
         $handler = $routeInfo[1];       // получение "название" обработчика, который прописан в диспетчере 'simpleDispatcher'
-        //$vars = $routeInfo[2];          // параметры которые пришли с запросом, их можно использовать
+        $vars = $routeInfo[2];          // параметры которые пришли с запросом, их можно использовать
 
         //d($handler); exit; // $handler - содержит Третий параметр из addRoute(1,2,3)
         //d($vars); exit;
@@ -72,7 +75,7 @@ switch ($routeInfo[0]) {    // по умолчание $routeInfo[0]
 
         // вызов метода '$handler[1]]'  Экземпляра
 
-        $vars = "vars";
+        //$vars = "vars";
         call_user_func([$controller,$handler[1]],$vars);
 break;
 }
